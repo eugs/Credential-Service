@@ -15,14 +15,14 @@ class Users {
         }
     }
 
-    createUserPool(env, users) {
+    createUserPool(env, users, sessionId) {
         if (this.sessions.has(env)) {
-            this.sessions.set(env, parseInt(this.sessions.get(env)) + 1);
+            this.sessions.set(env, this.sessions.get(env).concat(sessionId));
         } else {
             this.users.set(`${env}FreeUsers`, new Map());
             this.users.set(`${env}BusyUsers`, new Map());
             users.forEach(user => this.users.get(`${env}FreeUsers`).set(user.user, user.password));
-            this.sessions.set(env, 1);
+            this.sessions.set(env, [sessionId]);
         }
     }
 
@@ -51,13 +51,16 @@ class Users {
         }
     }
 
-    deleteUserPool(env) {
-        if (parseInt(this.sessions.get(env)) === 1) {
+    deleteUserPool(env, sessionId) {
+        if (this.sessions.get(env).length === 1 && this.sessions.get(env)[0] === sessionId) {
             this.users.delete(`${env}BusyUsers`);
             this.users.delete(`${env}FreeUsers`);
             this.sessions.delete(env);
-        }else{
-            this.sessions.set(env, parseInt(this.sessions.get(env)) - 1);
+            console.log(`Deleted for env ${env}`);
+        } else {
+            const sessionIndex = this.sessions.get(env).findIndex(el => el === 'sessionId');
+            this.sessions.set(env, this.sessions.get(env).splice(sessionIndex, 1));
+            console.log(this.sessions);
         }
     }
 }
