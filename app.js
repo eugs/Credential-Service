@@ -13,9 +13,12 @@ app.use(bodyParser.json());
 
 app.use('/api', indexRouter);
 // error handler
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.json(err.message);
+app.use(function(err, req, res, next) {
+  logger.error(err);
+  // res.status(err.status || 500);
+   console.error(err.stack);
+  // res.json(err.message);
+  res.status(err.status || 500).json(err);
 });
 
 module.exports = app;

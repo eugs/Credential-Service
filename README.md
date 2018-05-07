@@ -31,3 +31,12 @@ Requests:
 
     * `env:` environment where tests are run
     * `userName:` unlock user `userName == <user>`
+5. Reset all users for all envs
+
+        `GET /users/pool/reset`    
+
+6. Get all users for specified env:
+
+        `GET /users/pool:env`  
+
+    * `env:` environment where tests are run          
