@@ -13,6 +13,17 @@ router.route('/session/create')
         }
     });
 
+router.route('/users/pool/reset')
+    .get((req, res) => {
+        try {
+            users.resetState();
+            res.json({ message: "All users are deleted!"});
+        } catch (e) {
+            res.status(400).json({ message: e.stack })
+        }
+    }
+    );
+
 router.route('/users/pool/create')
     .post((req, res) => {
             try {
