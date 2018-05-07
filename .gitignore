@@ -6,3 +6,4 @@
 # Project specyfic
 node_modules
 debug.log
+logging.log

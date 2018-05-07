@@ -63,6 +63,11 @@ class Users {
             console.log(this.sessions);
         }
     }
+
+    resetState(){
+        this.users = new Map();
+        this.sessions = new Map();
+    }
 }
 
 module.exports = Users;
