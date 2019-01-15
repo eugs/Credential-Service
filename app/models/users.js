@@ -52,16 +52,16 @@ class Users {
     }
 
     deleteUserPool(env, sessionId) {
-        if (this.sessions.get(env).length === 1 && this.sessions.get(env)[0] === sessionId) {
+        // if (this.sessions.get(env).length === 1 && this.sessions.get(env)[0] === sessionId) {
             this.users.delete(`${env}BusyUsers`);
             this.users.delete(`${env}FreeUsers`);
             this.sessions.delete(env);
             console.log(`Deleted for env ${env}`);
-        } else {
-            const sessionIndex = this.sessions.get(env).findIndex(el => el === 'sessionId');
-            this.sessions.set(env, this.sessions.get(env).splice(sessionIndex, 1));
-            console.log(this.sessions);
-        }
+        // } else {
+        //     const sessionIndex = this.sessions.get(env).findIndex(el => el === sessionId);
+        //     this.sessions.set(env, this.sessions.get(env).splice(sessionIndex, 1));
+        //     console.log(this.sessions);
+        // }
     }
 
     resetState(){
